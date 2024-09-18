@@ -4,7 +4,10 @@ import random
 
 
 
-def randomcase(word):
+def randomcase(word: str) -> str:
+    '''
+    Randomizes capitalization in a word
+    '''
     result = ''
     for c in word:
         case = random.randint(0, 1)
@@ -15,6 +18,9 @@ def randomcase(word):
     return result
 
 def showhidepass():
+    '''
+    Function for the button that hides/shows your generated password
+    '''
     global passhidden
     if newpasword != "":
         if passhidden:
@@ -26,7 +32,10 @@ def showhidepass():
             showhidepassbutton.config(text="Show Password")
             passhidden = True
 
-def check_userpass(userpass):
+def check_userpass(userpass: str) -> bool:
+    '''
+    Checks if the password fits all the selected preferences
+    '''
 
     chosenupper = upperbool.get()
     chosenlower = lowerbool.get()
@@ -53,6 +62,9 @@ def check_userpass(userpass):
     return has_lower and has_upper and has_number and has_symbol
 
 def clear():
+    '''
+    Clears the password
+    '''
     global newpasword
     global password
     password = ""
@@ -60,11 +72,17 @@ def clear():
     label2.config(text=password)
 
 def copy():
+    '''
+    Copies the password to clipboard
+    '''
     global newpasword
     window.clipboard_clear()
     window.clipboard_append(newpasword)
 
 def submit():
+    '''
+    Handles all the info that was put in and generates a password using it
+    '''
     global newpasword
     global password
     length = 0
@@ -104,8 +122,8 @@ def submit():
             for i in range(0, length):
                 password = password + random.choice(randomcharlist)
             newpasword = passkeyword + password
-            eligiblepassword = check_userpass(newpasword) #Programmet krasjer hvis det er ikke nok plass til de valgte preferanser
-            if attempts >= 1000: #Det er ikke den beste fiks til bug rett over, men det er bedre enn ingen ting. Ganske lave sjanser at det går galt
+            eligiblepassword = check_userpass(newpasword) #THe program crashes if it doesn't have enough space for the chosen preferenses
+            if attempts >= 1000: #Not the best fix, but its something atleast
                 eligiblepassword = True
                 messagebox.showwarning("Alert!", " Alert! Not enough space for your selected preferences. Password might have generated incorrectly.")
             if eligiblepassword:
