@@ -131,7 +131,6 @@ def submit():
             else:
                 attempts += 1
                 continue
-        print(attempts)
         if passhidden:
             label2.config(text="Password generated (hidden)")
         else:
